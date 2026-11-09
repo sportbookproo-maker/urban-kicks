@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0e11">
+<meta name="description" content="Catálogo online de zapatillas. Elige tu talla y compra por WhatsApp.">
+<title>URBAN KICKS | Zapatillas</title>
+<style>
+:root{--bg:#0d0e11;--panel:#16181d;--muted:#a6a8b0;--white:#f7f7f8;--accent:#ff6b35;--line:#2a2d34}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.topbar{background:var(--accent);color:#171717;text-align:center;padding:9px 12px;font-size:12px;font-weight:800}
+header{position:sticky;top:0;z-index:10;background:rgba(13,14,17,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:22px;font-weight:900;letter-spacing:-1px;font-style:italic}.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:25px;color:#d7d7db;font-size:14px}.navlinks a:hover{color:var(--accent)}
+.cart{border:1px solid #454850;background:#1b1d22;border-radius:30px;padding:10px 16px;font-weight:700;display:flex;gap:8px;align-items:center}
+.cart b{background:var(--accent);color:#151515;border-radius:20px;min-width:22px;padding:1px 7px;font-size:12px;text-align:center}
+.hero{max-width:1180px;margin:auto;padding:50px 22px 40px;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:20px;min-height:520px}
+h1{font-size:clamp(44px,7vw,84px);line-height:.95;letter-spacing:-.05em;margin:0 0 18px;font-style:italic;font-weight:900}
+h1 em{color:var(--accent);font-style:italic}
+.hero p{color:#b9bbc2;line-height:1.7;max-width:440px;font-size:16px;margin:0 0 6px}
+.cta{display:inline-flex;background:var(--accent);color:#141414;font-weight:900;padding:15px 24px;border-radius:8px;margin-top:18px;transition:transform .2s}.cta:hover{transform:translateY(-3px)}
+.stage{position:relative;height:430px;display:grid;place-items:center;perspective:1000px;touch-action:pan-y;cursor:grab}
+.stage:before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,#ff6b3550,transparent 68%)}
+.stage .floor{position:absolute;bottom:46px;width:62%;height:26px;border-radius:50%;background:radial-gradient(ellipse,#000d,transparent 70%);animation:shadow 5s ease-in-out infinite}
+.rot{transform-style:preserve-3d;transition:transform .15s ease-out;width:min(92%,540px)}
+.hero-shoe{width:min(74%,330px);aspect-ratio:4/5;object-fit:cover;display:block;margin:auto;border-radius:20px;border:1px solid #ffffff22;box-shadow:0 40px 50px -20px #000d,0 0 60px #ff6b3533;animation:float 5s ease-in-out infinite}
+.hint{position:absolute;bottom:8px;font-size:12px;color:var(--muted)}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-14px) rotate(-2deg)}}
+@keyframes shadow{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.85);opacity:.6}}
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);max-width:1180px;margin:0 auto;padding:20px 22px;gap:12px;text-align:center}
+.trust strong{display:block;font-size:14px}.trust small{color:var(--muted);font-size:12px}
+section{max-width:1180px;margin:auto;padding:56px 22px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:22px}
+h2{font-size:34px;letter-spacing:-.04em;margin:0;font-style:italic}.sub{color:var(--muted);font-size:14px}
+.filters{display:flex;gap:8px;overflow:auto;padding:3px 0 16px}
+.filter{white-space:nowrap;border:1px solid #393c44;background:transparent;border-radius:30px;padding:10px 16px;font-size:13px}
+.filter.active,.filter:hover{background:var(--accent);border-color:var(--accent);color:#151515;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;perspective:1200px}
+.more{display:block;margin:26px auto 0;border:1px solid #454850;background:transparent;border-radius:30px;padding:13px 26px;font-weight:700}.more:hover{background:var(--accent);border-color:var(--accent);color:#151515}
+.product{transition:transform .15s ease-out;will-change:transform;background:var(--panel);border:1px solid #292c33;border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.photo{aspect-ratio:4/5;position:relative;background:#1a1c21;cursor:zoom-in;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.product:hover .photo img{transform:scale(1.06)}
+.tag{position:absolute;top:12px;left:12px;background:var(--accent);color:#151515;font-size:11px;font-weight:800;padding:5px 9px;border-radius:5px}
+.info{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.category{font-size:12px;color:var(--accent);font-weight:700}.info h3{font-size:18px;margin:0}.desc{color:var(--muted);font-size:13px;line-height:1.5}
+.sizes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.size{border:1px solid #3a3d45;background:transparent;border-radius:6px;min-width:38px;padding:7px 0;font-size:13px}
+.size.on{background:var(--white);color:#151515;border-color:var(--white);font-weight:800}
+.buyrow{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;gap:8px}
+.price{font-size:20px;font-weight:900}.ask{font-size:13px;font-weight:700;color:var(--muted)}.old{font-size:12px;color:#858891;text-decoration:line-through;margin-left:6px;font-weight:400}
+.add{border:0;background:#f4f4f4;color:#151515;border-radius:7px;padding:11px 13px;font-size:13px;font-weight:800}.add:hover{background:var(--accent)}
+.banner{background:linear-gradient(110deg,#ff6b35,#ff9a50);color:#151515;border-radius:14px;padding:30px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.banner h2{font-size:28px;margin:0 0 6px}.banner p{margin:0;font-size:14px}.banner a{background:#151515;color:#fff;padding:14px 20px;border-radius:8px;font-size:13px;font-weight:800;white-space:nowrap}
+footer{border-top:1px solid var(--line);padding:35px 22px;color:#a9abb2;text-align:center;font-size:13px}.footbrand{color:#fff;font-size:20px;font-weight:900;font-style:italic;margin-bottom:8px}
+.wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:#20c66a;color:#071b0e;border-radius:50px;padding:14px 18px;font-size:14px;font-weight:800;box-shadow:0 8px 25px #0008}
+.drawer{position:fixed;inset:0;z-index:30;display:none}.drawer.open{display:block}
+.drawer .bg{position:absolute;inset:0;background:#000a}
+.panel{position:absolute;right:0;top:0;bottom:0;width:min(400px,100%);background:#14161a;border-left:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.panel h3{margin:0;font-size:22px;font-style:italic;display:flex;justify-content:space-between;align-items:center}
+.close{background:none;border:1px solid #3a3d45;border-radius:50%;width:36px;height:36px}
+.item{display:flex;gap:12px;align-items:center;background:var(--panel);border-radius:10px;padding:10px}
+.item img{width:64px;height:80px;object-fit:cover;border-radius:8px;flex:none}.item div{flex:1;font-size:14px}.item small{color:var(--muted)}
+.item button{background:none;border:0;color:var(--muted);font-size:20px}
+.empty{color:var(--muted);font-size:14px;line-height:1.6}
+.send{margin-top:auto;display:block;text-align:center;background:#20c66a;color:#071b0e;font-weight:900;padding:15px;border-radius:9px}
+.send[aria-disabled=true]{opacity:.4;pointer-events:none}
+#lb{position:fixed;inset:0;z-index:50;background:#000e;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:16px}#lb.open{display:flex}#lb img{max-width:100%;max-height:82vh;border-radius:12px}#lb span{color:#fff;font-weight:700}
+.bbtns{display:flex;gap:8px;flex-wrap:wrap}.contact{line-height:2}.contact a{text-decoration:underline;text-underline-offset:3px}.callbtn{display:block;text-align:center;border:1px solid #454850;padding:13px;border-radius:9px;font-weight:700}
+.tier{font-size:11px;color:var(--muted);margin-top:6px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#fff;color:#111;padding:11px 18px;border-radius:30px;font-size:14px;font-weight:700;z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}.toast.show{opacity:1}
+@media(max-width:760px){.nav{padding:12px 16px}.navlinks{display:none}.hero{grid-template-columns:1fr;padding:30px 16px 20px;min-height:0;gap:0}.stage{height:330px;grid-row:1}.hero-copy{text-align:center}.hero p{margin:0 auto}.trust{padding:16px 8px}.trust strong{font-size:12px}.trust small{font-size:11px}section{padding:40px 16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.info{padding:12px}.info h3{font-size:15px}.desc{font-size:12px}.price{font-size:17px}.add{padding:10px}.size{min-width:34px;padding:6px 0;font-size:12px}.banner{display:block;padding:22px}.banner a{display:inline-block;margin-top:16px}h2{font-size:26px}.section-head{display:block}.section-head .sub{margin-top:6px}}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.music-toggle{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:21;
+ background:#1b1d22;color:#fff;border:1px solid #454850;border-radius:50px;padding:13px 16px;
+ font-size:13px;font-weight:800;box-shadow:0 8px 25px #0008;display:flex;align-items:center;gap:8px}
+.music-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.music-toggle .music-dot{width:8px;height:8px;border-radius:50%;background:#777}
+.music-toggle.playing .music-dot{background:#20c66a;box-shadow:0 0 10px #20c66a}
+@media(max-width:760px){.music-toggle{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:11px 13px;font-size:12px}}
+
+
+/* Cielo nocturno 3D: estrellas con profundidad y meteoros */
+html{background:#050812}
+body{position:relative;background:transparent;isolation:isolate}
+#starfield{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:-1;pointer-events:none;display:block;
+  background:radial-gradient(ellipse at 50% 0%,#111d38 0%,#080d1b 42%,#04060d 100%);
+}
+
+</style>
+</head>
+<body>
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+
+<audio id="storeMusic" src="music/audio-tienda.mp3" loop preload="none"></audio>
+<button class="music-toggle" id="musicToggle" type="button" aria-label="Activar música de fondo" aria-pressed="false">
+  <span class="music-dot"></span><span id="musicLabel">♫ Activar música</span>
+</button>
+
+
+<div class="topbar">Envíos a todo el Perú · Consulta disponibilidad y tallas</div>
+<header><nav class="nav"><a class="logo" href="#inicio">URBAN<span>KICKS.</span></a>
+<div class="navlinks"><a href="#inicio">Inicio</a><a href="#catalogo">Catálogo</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div>
+<button class="cart" id="openCart" aria-label="Abrir mi selección">🛍️ Mi selección <b id="count">0</b></button></nav></header>
+<main>
+<section class="hero" id="inicio">
+ <div class="hero-copy"><h1>CAMINA<br>CON <em>ACTITUD.</em></h1><p>Zapatillas que combinan comodidad, diseño y personalidad. Elige tu modelo, tu talla y escríbenos por WhatsApp.</p><a class="cta" href="#catalogo">Ver catálogo</a></div>
+ <div class="stage" id="stage" aria-label="Zapatilla destacada en 3D, muévela con el dedo o el mouse"><div class="floor"></div>
+  <div class="rot" id="rot"><img class="hero-shoe" src="img/22.jpg" alt="Zapatilla destacada"></div>
+  <span class="hint">Mueve la zapatilla con el dedo o el mouse</span></div>
+</section>
+<div class="trust"><div><strong>🚚 Envíos coordinados</strong><small>A tu ciudad o punto de entrega</small></div><div><strong>👟 Variedad de estilos</strong><small>Modelos para cada ocasión</small></div><div><strong>💬 Atención directa</strong><small>Resuelve tus dudas por WhatsApp</small></div></div>
+<section id="catalogo"><div class="section-head"><h2>Catálogo destacado</h2><div class="sub">Elige modelo y talla, luego envía tu selección por WhatsApp</div></div>
+<div class="filters"><button class="filter active" data-cat="Todos">Todos</button><button class="filter" data-cat="Running">Running</button><button class="filter" data-cat="Clásicas">Clásicas</button><button class="filter" data-cat="Altas">Altas</button></div>
+<div class="grid" id="products"></div><button class="more" id="more">Ver más modelos</button></section>
+<section id="nosotros"><div class="banner"><div><h2>¿Ya encontraste tu par?</h2><p>Escríbenos para confirmar tallas, colores, stock y formas de entrega.</p></div><span class="bbtns"><a href="#" class="wa-link">Hablar por WhatsApp</a><a href="tel:+51918302125" class="callnow">Llamar ahora</a></span></div></section>
+</main>
+<footer id="contacto"><div class="footbrand">URBAN<span style="color:var(--accent)">KICKS.</span></div><div>Tu estilo empieza por tus pasos.</div><p class="contact"><a href="https://wa.me/51910693746" target="_blank" rel="noopener">WhatsApp 910 693 746</a> · <a href="https://wa.me/51942212255" target="_blank" rel="noopener">WhatsApp 942 212 255</a><br><a href="tel:+51918302125">Llamar 918 302 125</a> · <a href="tel:+51910693746">Llamar 910 693 746</a></p><small>© 2026 URBAN KICKS</small></footer>
+<a class="wa wa-link" href="#">☏ WhatsApp</a>
+
+<div class="drawer" id="drawer"><div class="bg" id="bg"></div><aside class="panel" role="dialog" aria-label="Mi selección"><h3>Mi selección <button class="close" id="close" aria-label="Cerrar">✕</button></h3><div id="items"></div><a class="send" id="send" href="#" target="_blank" rel="noopener">Enviar selección por WhatsApp</a><a class="callbtn" href="tel:+51918302125">Prefiero llamar para pedir</a><p class="empty">Confirmamos stock, precio, pago y envío por WhatsApp.</p></aside></div>
+<div id="lb"><img alt=""><span></span></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== EDITA AQUÍ =====
+const WA="51910693746"; // WhatsApp principal: aquí llegan los pedidos (51 = Perú)
+const PRODUCTS=[{"id": 1,"name": "Modelo 01","cat": "Running","desc": "Blanco y plata, suela gruesa","img": "img/01.jpg","big": "img/full/01.jpg"},{"id": 2,"name": "Modelo 02","cat": "Running","desc": "Negro total, suela gruesa","img": "img/02.jpg","big": "img/full/02.jpg"},{"id": 3,"name": "Modelo 03","cat": "Altas","desc": "Blanco con azul cielo y gris","img": "img/03.jpg","big": "img/full/03.jpg"},{"id": 4,"name": "Modelo 04","cat": "Clásicas","desc": "Blanco con detalles azul marino","img": "img/04.jpg","big": "img/full/04.jpg"},{"id": 5,"name": "Modelo 05","cat": "Clásicas","desc": "Blanco total, perfil bajo","img": "img/05.jpg","big": "img/full/05.jpg"},{"id": 6,"name": "Modelo 06","cat": "Altas","desc": "Blanco y gris, estilo retro","img": "img/06.jpg","big": "img/full/06.jpg"},{"id": 7,"name": "Modelo 07","cat": "Clásicas","desc": "Negro con franjas blancas","img": "img/07.jpg","big": "img/full/07.jpg"},{"id": 8,"name": "Modelo 08","cat": "Clásicas","desc": "Negro y blanco, perfil bajo","img": "img/08.jpg","big": "img/full/08.jpg"},{"id": 9,"name": "Modelo 09","cat": "Running","desc": "Negro y blanco, suela gruesa","img": "img/09.jpg","big": "img/full/09.jpg"},{"id": 10,"name": "Modelo 10","cat": "Altas","desc": "Negro con malla blanca","img": "img/10.jpg","big": "img/full/10.jpg"},{"id": 11,"name": "Modelo 11","cat": "Clásicas","desc": "Negro brillante, perfil bajo","img": "img/11.jpg","big": "img/full/11.jpg"},{"id": 12,"name": "Modelo 12","cat": "Altas","desc": "Negro, bota media","img": "img/12.jpg","big": "img/full/12.jpg"},{"id": 13,"name": "Modelo 13","cat": "Altas","desc": "Blanco con azul cielo y gris","img": "img/13.jpg","big": "img/full/13.jpg"},{"id": 14,"name": "Modelo 14","cat": "Clásicas","desc": "Blanco con azul marino, plataforma","img": "img/14.jpg","big": "img/full/14.jpg"},{"id": 15,"name": "Modelo 15","cat": "Running","desc": "Plata con azul","img": "img/15.jpg","big": "img/full/15.jpg"},{"id": 16,"name": "Modelo 16","cat": "Running","desc": "Plata con verde","img": "img/16.jpg","big": "img/full/16.jpg"},{"id": 17,"name": "Modelo 17","cat": "Clásicas","desc": "Negro brillante con rojo","img": "img/17.jpg","big": "img/full/17.jpg"},{"id": 18,"name": "Modelo 18","cat": "Running","desc": "Negro y gris","img": "img/18.jpg","big": "img/full/18.jpg"},{"id": 19,"name": "Modelo 19","cat": "Clásicas","desc": "Blanco, cuero liso","img": "img/19.jpg","big": "img/full/19.jpg"},{"id": 20,"name": "Modelo 20","cat": "Running","desc": "Blanco con rosa","img": "img/20.jpg","big": "img/full/20.jpg"},{"id": 21,"name": "Modelo 21","cat": "Clásicas","desc": "Blanco y negro, perfil bajo","img": "img/21.jpg","big": "img/full/21.jpg"},{"id": 22,"name": "Modelo 22","cat": "Altas","desc": "Negro con rojo","img": "img/22.jpg","big": "img/full/22.jpg"},{"id": 23,"name": "Modelo 23","cat": "Clásicas","desc": "Blanco con rosa y suela café","img": "img/23.jpg","big": "img/full/23.jpg"},{"id": 24,"name": "Modelo 24","cat": "Clásicas","desc": "Negro brillante, perfil bajo","img": "img/24.jpg","big": "img/full/24.jpg"},{"id": 25,"name": "Modelo 25","cat": "Clásicas","desc": "Blanco con azul rey","img": "img/25.jpg","big": "img/full/25.jpg"},{"id": 26,"name": "Modelo 26","cat": "Altas","desc": "Negro con azul cielo","img": "img/26.jpg","big": "img/full/26.jpg"},{"id": 27,"name": "Modelo 27","cat": "Running","desc": "Plata con verde y azul","img": "img/27.jpg","big": "img/full/27.jpg"},{"id": 28,"name": "Modelo 28","cat": "Running","desc": "Blanco con detalles plateados","img": "img/28.jpg","big": "img/full/28.jpg"},{"id": 29,"name": "Modelo 29","cat": "Clásicas","desc": "Blanco con azul marino y suela café","img": "img/29.jpg","big": "img/full/29.jpg"},{"id": 30,"name": "Modelo 30","cat": "Running","desc": "Blanco con plata y azul","img": "img/30.jpg","big": "img/full/30.jpg"},{"id": 31,"name": "Modelo 31","cat": "Clásicas","desc": "Blanco con azul marino, tira al tobillo","img": "img/31.jpg","big": "img/full/31.jpg"},{"id": 32,"name": "Modelo 32","cat": "Altas","desc": "Blanco con gris y azul","img": "img/32.jpg","big": "img/full/32.jpg"}];
+const SIZES=[35,36,37,38,39,40,41,42];
+// Precio según la talla: 35 a 38 = S/ 79.90 · 39 a 42 = S/ 89.90 (cámbialo aquí)
+const priceOf=s=>s<=38?79.90:89.90;
+// =======================
+const $=s=>document.querySelector(s);
+const money=n=>"S/ "+n.toFixed(2);
+let cart=[],pick={},cat="Todos",shown=12;
+try{cart=JSON.parse(localStorage.getItem("uk-cart")||"[]")}catch(e){}
+const save=()=>{try{localStorage.setItem("uk-cart",JSON.stringify(cart))}catch(e){}};
+const waUrl=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
+document.querySelectorAll(".wa-link").forEach(a=>{a.href=waUrl("Hola, quiero información sobre sus zapatillas");a.target="_blank";a.rel="noopener"});
+
+function render(){
+ const list=PRODUCTS.filter(p=>cat==="Todos"||p.cat===cat);
+ $("#products").innerHTML=list.slice(0,shown).map(p=>`
+ <article class="product"><div class="photo" data-zoom="${p.id}"><img src="${p.img}" alt="${p.name}, ${p.desc}" loading="lazy" decoding="async"></div>
+ <div class="info"><div class="category">${p.cat}</div><h3>${p.name}</h3><div class="desc">${p.desc}</div>
+ <div class="sizes" role="group" aria-label="Talla">${SIZES.map(s=>`<button class="size${pick[p.id]===s?" on":""}" data-id="${p.id}" data-s="${s}">${s}</button>`).join("")}</div>
+ <div class="tier">35 a 38: S/ 79.90 · 39 a 42: S/ 89.90</div><div class="buyrow"><div class="price">${pick[p.id]?money(priceOf(pick[p.id])):"Desde "+money(79.90)}</div><button class="add" data-id="${p.id}">Agregar</button></div></div></article>`).join("");
+ $("#more").style.display=list.length>shown?"":"none";
+}
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),1800)}
+function renderCart(){
+ $("#count").textContent=cart.length;
+ $("#items").innerHTML=cart.length?cart.map((it,i)=>{const p=PRODUCTS.find(x=>x.id===it.id);return `<div class="item"><img src="${p.img}" alt=""><div><strong>${p.name}</strong><br><small>Talla ${it.size} · ${money(priceOf(it.size))}</small></div><button data-rm="${i}" aria-label="Quitar">✕</button></div>`}).join(""):`<p class="empty">Aún no agregaste zapatillas. Elige una talla en el catálogo y toca “Agregar”.</p>`;
+ const total=cart.reduce((s,it)=>s+priceOf(it.size),0);
+ const msg="Hola, quiero consultar por estas zapatillas:\n"+cart.map(it=>{const p=PRODUCTS.find(x=>x.id===it.id);return `• ${p.name} (${p.desc}) – talla ${it.size} – ${money(priceOf(it.size))}`}).join("\n")+(total?`\nTotal referencial: ${money(total)}`:"")+"\n¿Me confirman disponibilidad, precio y entrega?";
+ const s=$("#send");s.href=cart.length?waUrl(msg):"#";s.setAttribute("aria-disabled",cart.length?"false":"true");
+}
+$("#products").addEventListener("click",e=>{
+ const sz=e.target.closest(".size");
+ if(sz){pick[sz.dataset.id]=+sz.dataset.s;sz.closest(".info").querySelector(".price").textContent=money(priceOf(+sz.dataset.s));sz.parentElement.querySelectorAll(".size").forEach(b=>b.classList.toggle("on",b===sz));return}
+ const ad=e.target.closest(".add");
+ if(ad){const id=+ad.dataset.id;if(!pick[id]){toast("Elige tu talla primero");return}
+  cart.push({id,size:pick[id]});save();renderCart();toast("Agregada a tu selección")}
+});
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");cat=b.dataset.cat;shown=12;render()}));
+$("#more").onclick=()=>{shown+=12;render()};
+// Ver foto grande
+const lb=$("#lb");
+$("#products").addEventListener("click",e=>{const z=e.target.closest("[data-zoom]");if(!z)return;const p=PRODUCTS.find(x=>x.id==z.dataset.zoom);lb.querySelector("img").src=p.big||p.img;lb.querySelector("span").textContent=p.name+" · "+p.desc;lb.classList.add("open")});
+lb.onclick=()=>lb.classList.remove("open");
+// Efecto 3D al pasar el mouse por una tarjeta
+$("#products").addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;const c=e.target.closest(".product");if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateY(${x*10}deg) rotateX(${-y*10}deg) translateZ(8px)`});
+$("#products").addEventListener("pointerout",e=>{const c=e.target.closest(".product");if(c&&!c.contains(e.relatedTarget))c.style.transform=""});
+$("#items").addEventListener("click",e=>{const r=e.target.closest("[data-rm]");if(r){cart.splice(+r.dataset.rm,1);save();renderCart()}});
+const open=v=>$("#drawer").classList.toggle("open",v);
+$("#openCart").onclick=()=>open(true);$("#close").onclick=$("#bg").onclick=()=>open(false);
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){open(false);lb.classList.remove("open")}});
+
+// Zapatilla 3D del inicio: se inclina con el dedo o el mouse
+const stage=$("#stage"),rot=$("#rot");
+function tilt(x,y){const r=stage.getBoundingClientRect();const nx=(x-r.left)/r.width-.5,ny=(y-r.top)/r.height-.5;rot.style.transform=`rotateY(${nx*70}deg) rotateX(${-ny*25}deg)`}
+stage.addEventListener("pointermove",e=>tilt(e.clientX,e.clientY));
+stage.addEventListener("pointerleave",()=>rot.style.transform="");
+render();renderCart();
+</script>
+
+<script>
+(() => {
+  const audio = document.getElementById('storeMusic');
+  const button = document.getElementById('musicToggle');
+  const label = document.getElementById('musicLabel');
+  if (!audio || !button || !label) return;
+  audio.volume = 0.22;
+  button.addEventListener('click', async () => {
+    if (audio.paused) {
+      try {
+        await audio.play();
+        button.classList.add('playing');
+        button.setAttribute('aria-pressed', 'true');
+        button.setAttribute('aria-label', 'Pausar música de fondo');
+        label.textContent = '♫ Música activada';
+      } catch (err) {
+        label.textContent = 'Toca para reproducir';
+      }
+    } else {
+      audio.pause();
+      button.classList.remove('playing');
+      button.setAttribute('aria-pressed', 'false');
+      button.setAttribute('aria-label', 'Activar música de fondo');
+      label.textContent = '♫ Activar música';
+    }
+  });
+})();
+</script>
+
+
+<script>
+(() => {
+  const canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w = 0, h = 0, dpr = 1, stars = [], meteors = [];
+  let pointerX = 0, pointerY = 0, targetX = 0, targetY = 0;
+  let lastMeteor = 0, lastFrame = 0;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 1.7);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.max(100, Math.min(260, Math.floor(w * h / 5200)));
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      z: .25 + Math.random() * .95,
+      r: .35 + Math.random() * 1.35,
+      phase: Math.random() * Math.PI * 2,
+      speed: .35 + Math.random() * 1.2,
+      blue: Math.random() > .72
+    }));
+  }
+
+  function addMeteor(now) {
+    if (reduceMotion || now - lastMeteor < 4200 + Math.random() * 5200) return;
+    lastMeteor = now;
+    const fromLeft = Math.random() > .5;
+    const x = fromLeft ? Math.random() * w * .65 : w * (.35 + Math.random() * .65);
+    const y = Math.random() * h * .48;
+    meteors.push({
+      x, y, vx: (fromLeft ? 1 : -1) * (5 + Math.random() * 4),
+      vy: 2.1 + Math.random() * 2.5,
+      life: 0, max: 38 + Math.random() * 22,
+      length: 75 + Math.random() * 100,
+      width: .8 + Math.random() * 1.1
+    });
+  }
+
+  function draw(now) {
+    const dt = Math.min(34, now - (lastFrame || now));
+    lastFrame = now;
+    ctx.fillStyle = '#050812';
+    ctx.fillRect(0, 0, w, h);
+
+    // Subtle blue nebula glow for depth, without obscuring products.
+    const glow = ctx.createRadialGradient(w*.72, h*.16, 0, w*.72, h*.16, Math.max(w,h)*.7);
+    glow.addColorStop(0, 'rgba(31,61,112,.18)');
+    glow.addColorStop(.55, 'rgba(13,25,52,.08)');
+    glow.addColorStop(1, 'rgba(4,7,15,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0,0,w,h);
+
+    pointerX += (targetX - pointerX) * .035;
+    pointerY += (targetY - pointerY) * .035;
+    const t = now * .001;
+
+    for (const s of stars) {
+      const parallax = (1.25 - s.z) * 15;
+      let x = s.x + pointerX * parallax;
+      let y = s.y + pointerY * parallax;
+      x = (x + w) % w; y = (y + h) % h;
+      const twinkle = .52 + .48 * Math.sin(t * s.speed + s.phase);
+      const alpha = (.32 + .62 * twinkle) * (.55 + s.z * .42);
+      const radius = s.r * (.7 + s.z * .55);
+      ctx.beginPath();
+      ctx.fillStyle = s.blue ? `rgba(183,211,255,${alpha})` : `rgba(255,255,255,${alpha})`;
+      ctx.arc(x, y, radius, 0, Math.PI*2);
+      ctx.fill();
+      if (s.z > 1.03 && twinkle > .93) {
+        ctx.strokeStyle = `rgba(205,225,255,${alpha*.45})`;
+        ctx.lineWidth = .55;
+        ctx.beginPath(); ctx.moveTo(x-radius*3,y); ctx.lineTo(x+radius*3,y);
+        ctx.moveTo(x,y-radius*3); ctx.lineTo(x,y+radius*3); ctx.stroke();
+      }
+    }
+
+    addMeteor(now);
+    meteors = meteors.filter(m => m.life < m.max);
+    for (const m of meteors) {
+      const fade = Math.sin(Math.PI * m.life / m.max);
+      const tailX = m.x - m.vx * m.length / 8;
+      const tailY = m.y - m.vy * m.length / 8;
+      const grad = ctx.createLinearGradient(tailX, tailY, m.x, m.y);
+      grad.addColorStop(0, 'rgba(150,190,255,0)');
+      grad.addColorStop(1, `rgba(235,245,255,${fade*.95})`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = m.width;
+      ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(m.x, m.y); ctx.stroke();
+      ctx.beginPath(); ctx.fillStyle = `rgba(255,255,255,${fade})`;
+      ctx.arc(m.x, m.y, 1.6, 0, Math.PI*2); ctx.fill();
+      m.x += m.vx * (dt/16.7); m.y += m.vy * (dt/16.7); m.life += dt/16.7;
+    }
+    if (!reduceMotion) requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize, {passive:true});
+  window.addEventListener('pointermove', e => {
+    targetX = (e.clientX / Math.max(1,w) - .5) * 2;
+    targetY = (e.clientY / Math.max(1,h) - .5) * 2;
+  }, {passive:true});
+  window.addEventListener('deviceorientation', e => {
+    if (typeof e.gamma === 'number') targetX = Math.max(-1,Math.min(1,e.gamma/35));
+    if (typeof e.beta === 'number') targetY = Math.max(-1,Math.min(1,(e.beta-35)/45));
+  }, {passive:true});
+  resize();
+  if (reduceMotion) draw(0); else requestAnimationFrame(draw);
+})();
+</script>
+
+</body></html>
